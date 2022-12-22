@@ -32,6 +32,8 @@ The following 'Permissions (scopes)' are required:
 * Offline access (refresh tokens)
 * Create and manage tickets
 
+You will probably need to check the 'Allow non HTTPS connections' for testing this application, otherwise it would need to be deployed with HTTPS. However, in production systems should always force HTTPS for dynamic clients.
+
 Then, in the 'Allowed ticket types', select the same payment type as granted in the products.
 
 **Important**: It is important to have a single possible payment type because the example application will NOT pass the payment type as parameter when creating a ticket. If there would be multiple options, it would fail. In real world, multiple payment types means multiple currencies, which is not covered in this example.
