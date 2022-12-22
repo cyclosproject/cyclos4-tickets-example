@@ -1,0 +1,19 @@
+{
+    "properties": [
+        {
+            "name": "cyclos.serverUri",
+            "type": "java.lang.String",
+            "description": "The root URI where Cyclos server is deployed"
+        },
+        {
+            "name": "cyclos.appUri",
+            "type": "java.lang.String",
+            "description": "The root URI where this application is deployed"
+        },
+        {
+            "name": "cyclos.dataDir",
+            "type": "java.lang.String",
+            "description": "A directory where to store the persistent data. %t is replaced by the temp directory."
+        }
+    ]
+}

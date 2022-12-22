@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head th:replace="~{fragments/head}"></head>
+<script th:inline="javascript">
+  function init() {
+    const action = /*[[@{/start-over}]]*/ '';
+    document.getElementById('startOverButton').addEventListener('click', () => {
+      const form = document.getElementById('form');
+      form.action = action;
+      form.submit();
+    });
+  }
+</script>
+
+<body onload="init()">
+  <nav th:replace="~{fragments/nav}"></nav>
+  <div class="container mt-3">
+    <div class="card mt-3" style="max-width: 50rem;">
+      <div class="card-body">
+        <h5 class="card-title" th:text="${title}"></h5>
+        <form id="form" class="mt-3" th:action="@{/connection}" method="post"
+          enctype="application/x-www-form-urlencoded">
+          <div th:if="${!connection.connected}" class="mb-3 row">
+            <label for="status" class="col-sm-4 col-form-label">Connection status</label>
+            <div class="col-sm-6">
+              <input type="text" readonly class="form-control-plaintext" id="status" value="Not connected">
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-primary" type="submit">Connect</button>
+            </div>
+          </div>
+
+          <th:block th:if="${connection.connected}">
+            <div class="mb-3 row">
+              <label for="status" class="col-sm-4 col-form-label">Connected since</label>
+              <div class="col-sm-6">
+                <input type="text" readonly class="form-control-plaintext" id="status"
+                  th:value="${#temporals.format(connection.connectedSince, 'yyyy-MM-dd')}">
+              </div>
+              <div class="col-sm-2">
+                <button class="btn btn-primary" type="button" id="startOverButton">Start over</button>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="user" class="col-sm-4 col-form-label">Connected as</label>
+              <div class="col-sm-8">
+                <input type="text" readonly class="form-control-plaintext" id="user" th:value="${connection.user}">
+              </div>
+          </th:block>
+      </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
